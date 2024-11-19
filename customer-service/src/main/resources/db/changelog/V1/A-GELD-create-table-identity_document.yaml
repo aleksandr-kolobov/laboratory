@@ -1,0 +1,60 @@
+databaseChangeLog:
+  - changeSet:
+      id: A-GELD-create-table-identity_document
+      author: postgres
+      changes:
+        - createTable:
+            tableName: identity_document
+            columns:
+              - column:
+                  name: document_id
+                  type: uuid
+                  defaultValue: gen_random_uuid()
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: customer_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_identity_document_customer
+                    references: customer(customer_id)
+              - column:
+                  name: document_type_id
+                  type: smallint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_identity_document_identity_document_type_dictionary
+                    references: identity_document_type_dictionary(document_type_id)
+              - column:
+                  name: document_number
+                  type: varchar(12)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: issuing_country
+                  type: varchar(2)
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_identity_document_country_dictionary
+                    references: country_dictionary(country_code_iso)
+              - column:
+                  name: issuing_authority
+                  type: varchar(30)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: code_issuing_authority
+                  type: varchar(6)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: issue_date
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: expiration_date
+                  type: date
+                  constraints:
+                    nullable: true

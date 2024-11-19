@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/V1/A-GELD-create-table-bank_limit.yaml
+  - include:
+      file: db/changelog/V1/A-GELD-create-table-user_limit.yaml
+  - include:
+      file: db/changelog/V1/A-GELD-create-table-condition.yaml
+  - include:
+      file: db/changelog/V1/A-GELD-create-table-card_product.yaml
+  - include:
+      file: db/changelog/V1/A-GELD-create-table-card.yaml

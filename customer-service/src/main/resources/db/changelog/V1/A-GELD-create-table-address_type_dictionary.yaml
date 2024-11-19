@@ -1,0 +1,18 @@
+databaseChangeLog:
+  - changeSet:
+      id: A-GELD-create-table-address_type_dictionary
+      author: postgres
+      changes:
+        - createTable:
+            tableName: address_type_dictionary
+            columns:
+              - column:
+                  name: address_type_id
+                  type: smallint
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: address_type
+                  type: varchar(30)
+                  constraints:
+                    nullable: true

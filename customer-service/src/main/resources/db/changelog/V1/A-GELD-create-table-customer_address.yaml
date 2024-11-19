@@ -1,0 +1,28 @@
+databaseChangeLog:
+  - changeSet:
+      id: A-GELD-create-table-customer_address
+      author: postgres
+      changes:
+        - createTable:
+            tableName: customer_address
+            columns:
+              - column:
+                  name: customer_address_id
+                  type: uuid
+                  defaultValue: gen_random_uuid()
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: customer_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_customer_address_customer
+                    references: customer(customer_id)
+              - column:
+                  name: address_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_customer_address_address
+                    references: address(address_id)

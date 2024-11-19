@@ -1,0 +1,64 @@
+databaseChangeLog:
+  - changeSet:
+      id: A-GELD-create-table-card_product
+      author: postgres
+      changes:
+        - createTable:
+            tableName: card_product
+            columns:
+              - column:
+                  name: card_product_id
+                  type: varchar(5)
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: limit_id
+                  type: smallint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_card_product_limit
+                    references: bank_limit(limit_id)
+              - column:
+                  name: condition_id
+                  type: smallint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_card_product_condition
+                    references: condition(condition_id)
+              - column:
+                  name: image
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: name_product
+                  type: varchar(15)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: fee_use
+                  type: numeric(4,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: payment_system
+                  type: varchar(14)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: is_virtual
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: type_card
+                  type: varchar(7)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: level
+                  type: varchar(8)
+                  constraints:
+                    nullable: false

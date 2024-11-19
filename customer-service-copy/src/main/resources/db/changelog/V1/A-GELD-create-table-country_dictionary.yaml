@@ -1,0 +1,18 @@
+databaseChangeLog:
+  - changeSet:
+      id: A-GELD-create-table-country_dictionary
+      author: postgres
+      changes:
+        - createTable:
+            tableName: country_dictionary
+            columns:
+              - column:
+                  name: country_code_iso
+                  type: varchar(2)
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: country_name
+                  type: varchar(60)
+                  constraints:
+                    nullable: false

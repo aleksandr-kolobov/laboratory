@@ -1,0 +1,39 @@
+databaseChangeLog:
+  - changeSet:
+      id: A-GELD-create-table-condition
+      author: postgres
+      changes:
+        - createTable:
+            tableName: condition
+            columns:
+              - column:
+                  name: condition_id
+                  type: smallint
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: condition_withdraw
+                  type: numeric(12,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: condition_partner_withdraw
+                  type: numeric(12,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: condition_world_withdraw
+                  type: numeric(12,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: condition_transaction
+                  type: numeric(12,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: condition_pay
+                  type: numeric(12,2)
+                  constraints:
+                    nullable: false

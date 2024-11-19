@@ -1,0 +1,32 @@
+include:
+  - component: git.astondevs.ru/infrastructure/devops/gitlab-components/build-docker-image/build-docker-template@0.0.16
+  - component: git.astondevs.ru/infrastructure/devops/gitlab-components/deploy-project/deploy-via-compose-template@0.0.11
+    inputs:
+      rules: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop"
+
+
+
+create-container:
+  extends: .build-docker-template
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH || $CI_COMMIT_BRANCH == "develop"
+  
+deploy-dev:
+  extends: .deploy-via-compose
+  variables:
+    EXPOSE_HOST_PORT: "8085"
+    EXPOSE_CONTAINER_PORT: "8085"
+  tags:
+    - shell-dev
+  rules:
+    - if: $CI_COMMIT_BRANCH == "develop"
+
+deploy-prod:
+  extends: .deploy-via-compose
+  variables:
+    EXPOSE_HOST_PORT: "8085"
+    EXPOSE_CONTAINER_PORT: "8085"
+  tags:
+    - shell-prod
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"

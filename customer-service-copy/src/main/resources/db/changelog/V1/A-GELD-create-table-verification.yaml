@@ -1,0 +1,41 @@
+databaseChangeLog:
+  - changeSet:
+      id: A-GELD-create-table-verification
+      author: postgres
+      changes:
+        - createTable:
+            tableName: verification
+            columns:
+              - column:
+                  name: user_verification_id
+                  type: uuid
+                  defaultValue: gen_random_uuid()
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: customer_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_verification_customer
+                    referencedColumnNames: customer(customer_id)
+              - column:
+                  name: verification_code
+                  type: char(6)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: code_expiration
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: wrong_attempts_counter
+                  type: smallint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: sms_block_sending
+                  type: timestamp
+                  constraints:
+                    nullable: false

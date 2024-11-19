@@ -1,0 +1,5 @@
+include:
+  - component: git.astondevs.ru/infrastructure/devops/gitlab-components/deploy-project/deploy-via-compose@0.0.11
+    inputs:
+      tag: shell-${CI_COMMIT_REF_SLUG}
+

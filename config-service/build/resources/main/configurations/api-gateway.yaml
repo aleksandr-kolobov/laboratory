@@ -1,0 +1,82 @@
+server:
+  port: 8082
+
+eureka:
+  instance:
+    prefer-ip-address: true
+
+  client:
+    service-url:
+      defaultZone: http://discovery-service:8761/eureka
+    registerWithEureka: true
+    fetchRegistry: true
+
+spring:
+  reactor:
+    context-propagation: auto
+  cloud:
+    discovery:
+      enabled: true
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedHeaders: "*"
+            allowedMethods: "*"
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+
+      routes[0]:
+        id: customer
+        uri: lb://customer-service
+        predicates[0]: Path=/api/v1/customer/**
+        filters:
+          - AuthenticationFilter
+
+      routes[1]:
+        id: account
+        uri: lb://account-service
+        predicates[0]: Path=/api/v1/account/**
+        filters:
+          - AuthenticationFilter
+
+      routes[2]:
+        id: info
+        uri: lb://info-service
+        predicates[0]: Path=/api/v1/info/**
+        filters:
+          - AuthenticationFilter
+      routes[3]:
+        id: info
+        uri: lb://card-service
+        predicates[0]: Path=/api/v1/card-service/**
+        filters:
+          - AuthenticationFilter
+
+jwt:
+  secret: 1E28D61BCD38C6C64704B7996E7471DBAA317AFBC22E37D32BCDA3FB8A7FCA3F
+  jwt-expiration: 2m
+  jwt-refresh-expiration: 30m
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, metrics, prometheus
+  metrics:
+    distribution:
+      percentiles-histogram:
+        http:
+          server:
+            requests: true
+    tags:
+      application: ${spring.application.name}
+  observations:
+    key-values:
+      application: ${spring.application.name}
+  tracing:
+    sampling:
+      probability: 1.0

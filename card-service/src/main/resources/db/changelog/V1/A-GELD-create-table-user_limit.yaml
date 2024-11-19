@@ -1,0 +1,45 @@
+databaseChangeLog:
+  - changeSet:
+      id: A-GELD-create-table-user_limit
+      author: postgres
+      changes:
+        - createTable:
+            tableName: user_limit
+            columns:
+              - column:
+                  name: user_limit_id
+                  type: uuid
+                  defaultValue: gen_random_uuid()
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: withdraw_limit_day
+                  type: numeric(12,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: withdraw_limit_month
+                  type: numeric(12,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: transaction_limit_day
+                  type: numeric(12,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: transaction_limit_month
+                  type: numeric(12,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: pay_limit_day
+                  type: numeric(12,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: pay_limit_month
+                  type: numeric(12,2)
+                  constraints:
+                    nullable: false

@@ -1,0 +1,27 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/V1/A-GELD-create-table-family_status_dictionary.yaml
+  - include:
+      file: db/changelog/V1/A-GELD-create-table-status_dictionary.yaml
+  - include:
+      file: db/changelog/V1/A-GELD-create-table-country_dictionary.yaml
+  - include:
+      file: db/changelog/V1/A-GELD-create-table-address_type_dictionary.yaml
+  - include:
+      file: db/changelog/V1/A-GELD-create-table-identity_document_type_dictionary.yaml
+  - include:
+      file: db/changelog/V1/A-GELD-create-table-address.yaml
+  - include:
+      file: db/changelog/V1/A-GELD-create-table-customer.yaml
+  - include:
+      file: db/changelog/V1/A-GELD-create-table-identity_document.yaml
+  - include:
+      file: db/changelog/V1/A-GELD-create-table-customer_address.yaml
+  - include:
+      file: db/changelog/V1/A-GELD-create-table-user_profile.yaml
+  - include:
+      file: db/changelog/V1/A-GELD-create-table-verification.yaml
+  - include:
+      file: db/changelog/V1/A-GELD-create-table-user_role.yaml
+
+

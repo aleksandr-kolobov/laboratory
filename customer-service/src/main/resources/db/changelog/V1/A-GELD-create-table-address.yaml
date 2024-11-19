@@ -1,0 +1,63 @@
+databaseChangeLog:
+  - changeSet:
+      id: A-GELD-create-table-address
+      author: postgres
+      changes:
+        - createTable:
+            tableName: address
+            columns:
+              - column:
+                  name: address_id
+                  type: uuid
+                  defaultValue: gen_random_uuid()
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: address_type_id
+                  type: smallint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_address_address_type_dictionary
+                    references: address_type_dictionary(address_type_id)
+              - column:
+                  name: country_code_iso
+                  type: varchar(2)
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_address_country_dictionary
+                    references: country_dictionary(country_code_iso)
+              - column:
+                  name: region
+                  type: varchar(30)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: location
+                  type: varchar(30)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: street
+                  type: varchar(30)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: house_number
+                  type: varchar(5)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: building_number_house
+                  type: varchar(5)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: apartment_number
+                  type: varchar(5)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: postcode
+                  type: varchar(6)
+                  constraints:
+                    nullable: false

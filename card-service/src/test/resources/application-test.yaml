@@ -1,0 +1,10 @@
+spring:
+  sql:
+    init:
+      mode: always
+
+minio:
+  bucket: images
+  url: http://localhost:9000
+  accessKey: ageld
+  secretKey: ageldAdmin

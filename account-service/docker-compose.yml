@@ -1,0 +1,19 @@
+version: '3.7'
+services:
+  account-service: 
+    image: ${AND_DOCKER_REGISTRY_NAME}/${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}:${CI_COMMIT_REF_SLUG}
+    ports:
+      - ${EXPOSE_HOST_PORT}:${EXPOSE_CONTAINER_PORT}
+    logging:
+      options:
+        max-size: 10m
+    restart: always
+    environment:
+      FOO: BAR 
+    networks:
+      - a-geld
+networks:
+  a-geld:
+    external: true
+
+  

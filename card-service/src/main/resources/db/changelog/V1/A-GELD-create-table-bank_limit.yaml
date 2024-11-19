@@ -1,0 +1,74 @@
+databaseChangeLog:
+  - changeSet:
+      id: A-GELD-create-table-bank_limit
+      author: postgres
+      changes:
+        - createTable:
+            tableName: bank_limit
+            columns:
+              - column:
+                  name: limit_id
+                  type: smallint
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: withdraw_day
+                  type: numeric(12,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: withdraw_month
+                  type: numeric(12,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: transaction_day
+                  type: numeric(12,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: transaction_month
+                  type: numeric(12,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: pay_day
+                  type: numeric(12,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: pay_month
+                  type: numeric(12,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: over_withdraw_day
+                  type: numeric(12,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: over_withdraw_month
+                  type: numeric(12,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: over_transaction_day
+                  type: numeric(12,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: over_transaction_month
+                  type: numeric(12,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: over_pay_day
+                  type: numeric(12,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: over_pay_month
+                  type: numeric(12,2)
+                  constraints:
+                    nullable: false

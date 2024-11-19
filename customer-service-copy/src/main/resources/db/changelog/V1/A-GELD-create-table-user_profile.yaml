@@ -1,0 +1,34 @@
+databaseChangeLog:
+  - changeSet:
+      id: A-GELD-create-table-user_profile
+      author: postgres
+      changes:
+        - createTable:
+            tableName: user_profile
+            columns:
+              - column:
+                  name: user_profile_id
+                  type: uuid
+                  defaultValue: gen_random_uuid()
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: customer_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_user_profile_customer
+                    referencedColumnNames: customer(customer_id)
+                    unique: true
+              - column:
+                  name: hash_password
+                  type: varchar(64)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: registration_date_app
+                  type: date
+                  constraints:
+                    nullable: false
+
+

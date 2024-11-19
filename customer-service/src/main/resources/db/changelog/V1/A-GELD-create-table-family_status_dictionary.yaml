@@ -1,0 +1,18 @@
+databaseChangeLog:
+  - changeSet:
+      id: A-GELD-create-table-family_status_dictionary
+      author: postgres
+      changes:
+        - createTable:
+            tableName: family_status_dictionary
+            columns:
+              - column:
+                  name: family_status
+                  type: smallint
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: family_status_name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false

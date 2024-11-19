@@ -1,0 +1,71 @@
+databaseChangeLog:
+  - changeSet:
+      id: A-GELD-create-table-account
+      author: postgres
+      changes:
+        - createTable:
+            tableName: account
+            columns:
+              - column:
+                  name: account_id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: customer_id
+                  type: uuid
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: account_number
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: type
+                  type: varchar(10)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: account_balance
+                  type: numeric(12,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: hold_balance
+                  type: numeric(12,2)
+              - column:
+                  name: status_name
+                  type: varchar(7)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: closed_at
+                  type: date
+              - column:
+                  name: block_reason
+                  type: varchar(255)
+              - column:
+                  name: block_comment
+                  type: varchar(255)
+              - column:
+                  name: currency_name
+                  type: varchar(3)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: master_account
+                  type: boolean
+                  constraints:
+                    nullable: false
+                  defaultValueBoolean: false
+              - column:
+                  name: name_account
+                  type: varchar(15)

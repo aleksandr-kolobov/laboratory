@@ -1,0 +1,55 @@
+server:
+  port: 8084
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://discovery-service:8761/eureka
+
+spring:
+  data:
+    redis:
+      host: redis
+      port: 6379
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://db:5432/customer_db
+    username: postgres
+    password: postgres
+    hikari:
+      maximum-pool-size: 10
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+
+jwt:
+  secret: 1E28D61BCD38C6C64704B7996E7471DBAA317AFBC22E37D32BCDA3FB8A7FCA3F
+  jwt-expiration: 2m
+  jwt-refresh-expiration: 30m
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, metrics, prometheus
+  metrics:
+    distribution:
+      percentiles-histogram:
+        http:
+          server:
+            requests: true
+    tags:
+      application: ${spring.application.name}
+  observations:
+    key-values:
+      application: ${spring.application.name}
+  tracing:
+    sampling:
+      probability: 1.0

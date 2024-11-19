@@ -1,0 +1,123 @@
+databaseChangeLog:
+#  - changeSet:
+#      id: A-GELD-add-postgis-extension
+#      author: postgres
+#      changes:
+#        - sql:
+#            sql: "CREATE EXTENSION IF NOT EXISTS postgis;"
+
+  - changeSet:
+      id: A-GELD-create-table-object
+      author: postgres
+      changes:
+        - createTable:
+            tableName: object
+            columns:
+              - column:
+                  name: object_id
+                  type: uuid
+                  defaultValue: gen_random_uuid()
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: object_type_name
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: object_number
+                  type: integer
+                  constraints:
+                    nullable: false
+              - column:
+                  name: region
+                  type: varchar(30)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: location
+                  type: varchar(30)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: street
+                  type: varchar(50)
+              - column:
+                  name: microdistrict
+                  type: varchar(30)
+              - column:
+                  name: building_number_house
+                  type: varchar(5)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: house_number
+                  type: varchar(5)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: segment
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: currency_exchange
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: replenishment
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: replenishment_without_card
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: withdrawal
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: bank_transfer
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: transfer_between_accounts
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: credit_take
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: credit_repayment
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: insurance
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: object_status
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: schedule
+                  type: varchar
+                  constraints:
+                    nullable: false
+#              - column:
+#                  name: coordinates
+#                  type: geometry(Point, 4326)
+#                  constraints:
+#                    nullable: false

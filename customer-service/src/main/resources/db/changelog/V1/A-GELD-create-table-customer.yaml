@@ -1,0 +1,104 @@
+databaseChangeLog:
+  - changeSet:
+      id: A-GELD-create-table-customer
+      author: postgres
+      changes:
+        - createTable:
+            tableName: customer
+            columns:
+              - column:
+                  name: customer_id
+                  type: uuid
+                  defaultValue: gen_random_uuid()
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: first_name
+                  type: varchar(30)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_name
+                  type: varchar(30)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: middle_name
+                  type: varchar(30)
+              - column:
+                  name: phone_number
+                  type: varchar(11)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: email
+                  type: varchar(70)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: gender
+                  type: char
+                  constraints:
+                    nullable: false
+              - column:
+                  name: birth_date
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: family_status_code
+                  type: smallint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_customer_family_status_dictionary
+                    references: family_status_dictionary(family_status)
+              - column:
+                  name: child_count
+                  type: smallint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: registration_date_bank
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: secret_question
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: secret_answer
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: citizenship
+                  type: varchar(2)
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_customer_country_dictionary
+                    references: country_dictionary(country_code_iso)
+              - column:
+                  name: status_type
+                  type: smallint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_customer_status_dictionary
+                    references: status_dictionary(status_type)
+              - column:
+                  name: sms_notification
+                  type: boolean
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: A-GELD-add-check-constraint-on-customer
+      author: s.bubovich
+      changes:
+        - sql:
+            "sql":
+              "ALTER TABLE customer ADD CONSTRAINT birth_date_check CHECK (
+              ((TRUNC((CURRENT_DATE  -  birth_date)/365.25))>13) 
+              AND 
+              ((TRUNC((CURRENT_DATE - birth_date)/365.25))<66))"

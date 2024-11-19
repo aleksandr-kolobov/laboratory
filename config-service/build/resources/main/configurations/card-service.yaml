@@ -1,0 +1,31 @@
+server:
+  port: 8087
+
+spring:
+  application:
+    name: card-service
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://db:5432/card_db
+    username: postgres
+    password: postgres
+    hikari:
+      maximum-pool-size: 10
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+
+eureka:
+  instance:
+    prefer-ip-address: true
+
+  client:
+    service-url:
+      defaultZone: http://discovery-service:8761/eureka
+
+minio:
+  bucket: images
+  url: http://172.17.1.76:9000
+  accessKey: ageld
+  secretKey: ageldAdmin

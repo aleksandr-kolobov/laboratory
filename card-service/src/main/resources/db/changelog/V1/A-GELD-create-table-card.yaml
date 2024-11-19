@@ -1,0 +1,86 @@
+databaseChangeLog:
+  - changeSet:
+      id: A-GELD-create-table-card
+      author: postgres
+      changes:
+        - createTable:
+            tableName: card
+            columns:
+              - column:
+                  name: card_id
+                  type: uuid
+                  defaultValue: gen_random_uuid()
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: customer_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+              - column:
+                  name: account_number
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_limit
+                  type: uuid
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_card_user_limit
+                    references: user_limit(user_limit_id)
+              - column:
+                  name: card_product_id
+                  type: varchar(5)
+                  constraints:
+                    nullable: false
+                    unique: false
+                    foreignKeyName: fk_card_card_product_id
+                    references: card_product(card_product_id)
+              - column:
+                  name: card_number
+                  type: varchar(16)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: balance
+                  type: numeric(12,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: cvv_encrypted
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: pin_code_hash
+                  type: varchar(64)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: status_name
+                  type: varchar(7)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: timestamp with time zone
+                  constraints:
+                    nullable: false
+              - column:
+                  name: expiration_at
+                  type: timestamp with time zone
+                  constraints:
+                    nullable: false
+              - column:
+                  name: closed_at
+                  type: timestamp with time zone
+              - column:
+                  name: blocked_at
+                  type: timestamp with time zone
+              - column:
+                  name: block_comment
+                  type: varchar(255)
